@@ -1,0 +1,161 @@
+{
+  "version": "1.0.0",
+  "theme_name": "Digital Keys Store",
+  "repo_url": "https://github.com/tariiq88/salla-digital-keys-theme",
+  "support_url": "mailto:b.tariiq88@gmail.com",
+  "author": {
+    "name": "Tariq AL Otaibi",
+    "email": "b.tariiq88@gmail.com",
+    "url": "mailto:b.tariiq88@gmail.com"
+  },
+  "description": {
+    "ar": "ثيم متجر المفاتيح الرقمية - متخصص في بيع الاشتراكات الرقمية والمفاتيح",
+    "en": "Digital Keys Store Theme - Specialized in selling digital subscriptions and keys"
+  },
+  "categories": ["Digital Products"],
+  "settings": [
+    {
+      "type": "boolean",
+      "label": "تفعيل الشريط العلوي",
+      "id": "enable_top_bar",
+      "format": "switch",
+      "selected": true
+    },
+    {
+      "type": "string",
+      "label": "لون الشريط العلوي",
+      "id": "top_bar_color",
+      "format": "color",
+      "value": "#667eea"
+    },
+    {
+      "type": "string",
+      "label": "نص الشريط العلوي",
+      "id": "top_bar_text",
+      "format": "text",
+      "value": "عروض خاصة على جميع المفاتيح الرقمية"
+    },
+    {
+      "type": "string",
+      "id": "placeholder",
+      "format": "hidden",
+      "value": "assets/images/placeholder.png"
+    },
+    {
+      "type": "boolean",
+      "label": "عرض منتجات البطل",
+      "id": "show_hero_products",
+      "format": "switch",
+      "selected": true
+    },
+    {
+      "type": "string",
+      "label": "عنوان القسم الرئيسي",
+      "id": "hero_title",
+      "format": "text",
+      "value": "أفضل المفاتيح الرقمية والاشتراكات"
+    },
+    {
+      "type": "string",
+      "label": "وصف القسم الرئيسي",
+      "id": "hero_description",
+      "format": "textarea",
+      "value": "احصل على اشتراكات Netflix، YouTube Premium، Xbox Game Pass، وأكثر بأفضل الأسعار"
+    }
+  ],
+  "features": [
+    "component-featured-products",
+    "component-products-slider", 
+    "component-testimonials",
+    "component-store-features",
+    "filters"
+  ],
+  "components": [
+    {
+      "name": "hero-products-showcase",
+      "title": "عرض منتجات البطل",
+      "icon": "sicon-star",
+      "path": "home.hero-products",
+      "fields": [
+        {
+          "id": "products",
+          "type": "collection",
+          "format": "collection",
+          "required": true,
+          "minLength": 3,
+          "maxLength": 8,
+          "fields": [
+            {
+              "id": "product_id",
+              "type": "string",
+              "label": "معرف المنتج",
+              "required": true
+            },
+            {
+              "id": "custom_icon",
+              "type": "string",
+              "format": "image",
+              "label": "أيقونة مخصصة (اختياري)"
+            },
+            {
+              "id": "icon_color",
+              "type": "string",
+              "format": "color",
+              "label": "لون الأيقونة",
+              "value": "#667eea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "digital-product-card",
+      "title": "بطاقة المنتج الرقمي",
+      "icon": "sicon-gift-card",
+      "path": "components.product-card",
+      "fields": [
+        {
+          "id": "show_badge",
+          "type": "boolean",
+          "label": "عرض شارة المنتج",
+          "format": "switch",
+          "selected": true
+        },
+        {
+          "id": "badge_text",
+          "type": "string",
+          "label": "نص الشارة",
+          "value": "الأكثر مبيعاً"
+        },
+        {
+          "id": "button_style",
+          "type": "string",
+          "label": "نمط الزر",
+          "format": "select",
+          "options": [
+            {"value": "gradient", "label": "متدرج"},
+            {"value": "solid", "label": "لون واحد"}
+          ],
+          "value": "gradient"
+        }
+      ]
+    }
+  ],
+  "pages": [
+    "index",
+    "product.single",
+    "cart", 
+    "customer.profile",
+    "customer.orders",
+    "page.single"
+  ],
+  "required_apis": [
+    "products",
+    "cart",
+    "customer",
+    "orders"
+  ],
+  "rtl_support": true,
+  "mobile_responsive": true,
+  "min_salla_version": "3.0.0"
+}
