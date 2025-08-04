@@ -1,5 +1,6 @@
 # Files not needed for Salla Partners upload
 *.md
+!README.md
 demo.html
 admin.html
 cart.html
