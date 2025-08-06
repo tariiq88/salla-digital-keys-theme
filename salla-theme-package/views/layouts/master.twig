@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="{{ app.current_locale }}" dir="{{ app.current_locale == 'ar' ? 'rtl' : 'ltr' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ store.name }}{% endblock %}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% block description %}{{ store.description }}{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}مفاتيح رقمية, اشتراكات, نتفليكس, يوتيوب, ألعاب{% endblock %}">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}{{ store.name }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ store.description }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ 'images/logo.png' | asset }}{% endblock %}">
+    <meta property="og:url" content="{{ app.current_url }}">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Salla Icons -->
+    <link rel="stylesheet" href="{{ 'sicon' | cdn }}">
+    
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="{{ 'styles/main.css' | asset }}">
+    
+    {% block additional_css %}{% endblock %}
+    
+    <!-- Salla Web Components -->
+    <script src="{{ 'web-components' | cdn }}" defer></script>
+    
+    <!-- Custom Scripts -->
+    <script src="{{ 'js/main.js' | asset }}" defer></script>
+    
+    {% block additional_js %}{% endblock %}
+</head>
+<body class="{{ body_class | default('') }}">
+    
+    <!-- Header -->
+    {% include 'components.header' %}
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    {% include 'components.footer' %}
+    
+    <!-- Salla Scripts -->
+    <script>
+        // Initialize Salla Web Components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Salla initialization code
+            if (typeof Salla !== 'undefined') {
+                Salla.init({
+                    store_id: '{{ store.id }}',
+                    currency: '{{ store.currency }}',
+                    locale: '{{ app.current_locale }}'
+                });
+            }
+        });
+    </script>
+    
+    {% block footer_scripts %}{% endblock %}
+</body>
+</html>

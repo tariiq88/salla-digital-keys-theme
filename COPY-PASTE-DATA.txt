@@ -1,0 +1,27 @@
+بيانات الثيم للنسخ في Salla Partners:
+
+اسم الثيم:
+Digital Keys Store
+
+الفئة:
+Digital Products
+
+بريد الدعم:
+b.tariiq88@gmail.com
+
+الوصف العربي:
+ثيم متخصص في بيع المفاتيح الرقمية والاشتراكات مثل Netflix، Xbox Game Pass، Office 365. يتميز بتصميم عصري ومتجاوب مع دعم كامل للغة العربية ونظام RTL. يحتوي على مكونات مخصصة لعرض المنتجات الرقمية بشكل احترافي وجذاب.
+
+الوصف الإنجليزي:
+Specialized theme for selling digital keys and subscriptions like Netflix, Xbox Game Pass, Office 365. Features modern responsive design with full Arabic language support and RTL system. Contains custom components for displaying digital products professionally and attractively.
+
+الكلمات المفتاحية:
+digital-keys, subscriptions, gaming, netflix, xbox, office, arabic, rtl, responsive, ecommerce
+
+رابط GitHub (إذا أنشأت مستودع):
+https://github.com/tariiq88/salla-digital-keys-theme
+
+معلومات المطور:
+الاسم: Tariq AL Otaibi
+البريد: b.tariiq88@gmail.com
+الدولة: Saudi Arabia

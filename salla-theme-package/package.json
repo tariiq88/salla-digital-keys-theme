@@ -1,0 +1,56 @@
+{
+  "name": "salla-digital-keys-theme",
+  "version": "1.0.0",
+  "description": "ثيم متجر المفاتيح الرقمية لمنصة سلة - متخصص في بيع الاشتراكات الرقمية والمفاتيح",
+  "keywords": [
+    "salla",
+    "theme",
+    "digital-keys",
+    "subscriptions",
+    "arabic",
+    "rtl",
+    "ecommerce"
+  ],
+  "author": {
+    "name": "Tariq AL Otaibi",
+    "email": "b.tariiq88@gmail.com",
+    "url": "mailto:b.tariiq88@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tariiq88/salla-digital-keys-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tariiq88/salla-digital-keys-theme/issues"
+  },
+  "homepage": "https://github.com/tariiq88/salla-digital-keys-theme#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "dev": "echo 'Development server not configured'",
+    "build": "echo 'Build process not configured'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'Linting not configured'"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "salla": {
+    "theme": {
+      "name": "Digital Keys Store",
+      "version": "1.0.0",
+      "category": "Digital Products",
+      "min_salla_version": "3.0.0",
+      "rtl_support": true,
+      "mobile_responsive": true,
+      "features": [
+        "digital-products",
+        "subscriptions",
+        "arabic-support",
+        "admin-panel",
+        "custom-icons"
+      ]
+    }
+  }
+}

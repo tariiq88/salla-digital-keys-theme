@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Keys Store - معاينة للتصوير</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-section {
+            padding: 50px 30px;
+            text-align: center;
+            background: linear-gradient(45deg, #f8f9ff 0%, #e8f4fd 100%);
+        }
+        
+        .hero-section h2 {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .hero-section p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .badge {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: opacity 0.3s ease;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        .features-section {
+            background: #f8f9fa;
+            padding: 50px 30px;
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-item {
+            text-align: center;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            color: white;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🔑 Digital Keys Store</h1>
+            <p>متجر المفاتيح الرقمية والاشتراكات</p>
+        </header>
+        
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h2>أفضل المفاتيح الرقمية والاشتراكات</h2>
+            <p>احصل على اشتراكات Netflix، YouTube Premium، Xbox Game Pass، وأكثر بأفضل الأسعار</p>
+        </section>
+        
+        <!-- Products Grid -->
+        <section class="products-grid">
+            <div class="product-card">
+                <div class="badge">الأكثر مبيعاً</div>
+                <div class="product-icon">🎮</div>
+                <h3 class="product-title">Xbox Game Pass Ultimate</h3>
+                <div class="product-price">149 ريال</div>
+                <p class="product-description">اشتراك لمدة 3 أشهر في أفضل ألعاب Xbox</p>
+                <button class="btn">إضافة للسلة</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="badge">جديد</div>
+                <div class="product-icon">🎬</div>
+                <h3 class="product-title">Netflix Premium</h3>
+                <div class="product-price">79 ريال</div>
+                <p class="product-description">حساب نتفليكس بريميوم لمدة شهر واحد</p>
+                <button class="btn">إضافة للسلة</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="badge">عرض خاص</div>
+                <div class="product-icon">💼</div>
+                <h3 class="product-title">Microsoft Office 365</h3>
+                <div class="product-price">299 ريال</div>
+                <p class="product-description">ترخيص أوفيس 365 لسنة كاملة</p>
+                <button class="btn">إضافة للسلة</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-icon">🎵</div>
+                <h3 class="product-title">Spotify Premium</h3>
+                <div class="product-price">39 ريال</div>
+                <p class="product-description">اشتراك سبوتيفاي بريميوم لشهر واحد</p>
+                <button class="btn">إضافة للسلة</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-icon">📺</div>
+                <h3 class="product-title">YouTube Premium</h3>
+                <div class="product-price">49 ريال</div>
+                <p class="product-description">يوتيوب بريميوم بدون إعلانات لشهر</p>
+                <button class="btn">إضافة للسلة</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-icon">🎨</div>
+                <h3 class="product-title">Adobe Creative Cloud</h3>
+                <div class="product-price">199 ريال</div>
+                <p class="product-description">برامج أدوبي الكاملة لشهر واحد</p>
+                <button class="btn">إضافة للسلة</button>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2>لماذا تختار متجرنا؟</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3>تسليم فوري</h3>
+                    <p>احصل على مفاتيحك خلال دقائق</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>ضمان 100%</h3>
+                    <p>جميع منتجاتنا أصلية ومضمونة</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💳</div>
+                    <h3>دفع آمن</h3>
+                    <p>طرق دفع متعددة وآمنة</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎧</div>
+                    <h3>دعم 24/7</h3>
+                    <p>خدمة عملاء متواجدة دائماً</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2025 Digital Keys Store - جميع الحقوق محفوظة</p>
+            <p>تطوير: Tariq AL Otaibi</p>
+        </footer>
+    </div>
+</body>
+</html>
