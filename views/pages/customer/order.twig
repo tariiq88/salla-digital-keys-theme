@@ -1,0 +1,99 @@
+{% extends 'layouts.master' %}
+
+{% block content %}
+
+<div class="container py-4 md:py-8">
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold mb-2">{{ trans('common.my_orders') }}</h1>
+        <p class="text-gray-500">{{ trans('common.view_manage_orders') }}</p>
+    </div>
+    
+    {# Digital Keys Section #}
+    {% if order.has_digital_products %}
+    <div class="digital-keys-section revealed mb-10">
+        <h2 class="text-xl font-semibold mb-4">{{ trans('common.digital_keys') }}</h2>
+        
+        <div class="grid gap-4 md:grid-cols-2">
+            {% for item in order.items %}
+                {% if item.is_digital %}
+                    {% include 'components.digital-key' with {
+                        'title': item.product.name,
+                        'key_value': item.digital_key|default('XXXX-XXXX-XXXX-XXXX'),
+                        'expiry_date': item.expires_at|default(null),
+                        'instructions': item.product.activation_instructions|default(null),
+                        'show_expiry_warning': true
+                    } %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
+    {# Order Information #}
+    <div class="bg-white rounded-lg shadow-sm p-5 mb-5">
+        <div class="flex justify-between items-center mb-4 flex-wrap">
+            <h2 class="text-lg font-semibold">{{ trans('pages.order') }} #{{ order.reference_id }}</h2>
+            <div class="flex items-center">
+                <span class="px-3 py-1 rounded-full {{ order.status.color }} text-white text-sm">
+                    {{ order.status.name }}
+                </span>
+            </div>
+        </div>
+        
+        <div class="grid md:grid-cols-4 gap-4 text-sm border-b border-gray-100 pb-5 mb-5">
+            <div>
+                <div class="text-gray-500 mb-1">{{ trans('pages.date') }}</div>
+                <div>{{ order.date }}</div>
+            </div>
+            <div>
+                <div class="text-gray-500 mb-1">{{ trans('pages.total') }}</div>
+                <div>{{ order.total }}</div>
+            </div>
+            <div>
+                <div class="text-gray-500 mb-1">{{ trans('pages.payment_method') }}</div>
+                <div>{{ order.payment_method.name }}</div>
+            </div>
+            <div>
+                <div class="text-gray-500 mb-1">{{ trans('pages.shipping_company') }}</div>
+                <div>{{ order.shipping_company.name }}</div>
+            </div>
+        </div>
+        
+        {# Order Items #}
+        <div class="mb-5">
+            <h3 class="font-semibold mb-3">{{ trans('pages.items') }}</h3>
+            
+            {% for item in order.items %}
+                <div class="flex py-3 border-b border-gray-100 last:border-0">
+                    <div class="w-20 h-20 rounded-md overflow-hidden">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between ms-3">
+                        <div>
+                            <h4 class="font-semibold">{{ item.product.name }}</h4>
+                            <div class="text-sm text-gray-500">{{ item.quantity }} × {{ item.price }}</div>
+                        </div>
+                        {% if item.options %}
+                            <div class="text-xs text-gray-500">
+                                {% for option in item.options %}
+                                    <div><span class="font-semibold">{{ option.name }}:</span> {{ option.value }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        
+                        {% if item.is_digital %}
+                            <div class="mt-2">
+                                <div class="inline-flex items-center px-2 py-1 text-xs rounded bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+                                    <salla-icon name="key" width="14px" height="14px" class="ms-1"></salla-icon>
+                                    {{ trans('common.digital_product') }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

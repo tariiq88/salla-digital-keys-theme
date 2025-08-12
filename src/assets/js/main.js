@@ -250,13 +250,38 @@ class DigitalKeysTheme {
         this.initializeProductSliders();
         this.initializeImageGalleries();
         this.initializeFilterSortOptions();
+        this.initializeDigitalKeysCopy();
+        this.initializeCategoryFilters();
     }
 
     initializeProductSliders() {
         // Initialize product sliders if needed
         const sliders = document.querySelectorAll('.products-slider');
         sliders.forEach(slider => {
-            // Custom slider initialization logic
+            // Enhanced slider with custom navigation and autoplay
+            if (typeof Swiper !== 'undefined') {
+                new Swiper(slider, {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    navigation: {
+                        nextEl: slider.querySelector('.swiper-button-next'),
+                        prevEl: slider.querySelector('.swiper-button-prev'),
+                    },
+                    pagination: {
+                        el: slider.querySelector('.swiper-pagination'),
+                        clickable: true,
+                    },
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                    breakpoints: {
+                        640: { slidesPerView: 2 },
+                        768: { slidesPerView: 3 },
+                        1024: { slidesPerView: 4 }
+                    }
+                });
+            }
         });
     }
 
@@ -282,7 +307,20 @@ class DigitalKeysTheme {
             console.log('Salla is ready');
             this.updateCartCount();
             this.setupSallaEventListeners();
+            this.setupDigitalKeysFeatures();
         });
+    }
+    
+    // New method for digital keys specific features
+    setupDigitalKeysFeatures() {
+        // Setup digital keys copy functionality
+        this.setupKeyCopyButtons();
+        
+        // Setup automatic key reveal after purchase
+        this.setupAutoKeyReveal();
+        
+        // Setup subscription expiration notifications
+        this.setupExpirationNotifications();
     }
 
     setupSallaEventListeners() {
@@ -302,6 +340,118 @@ class DigitalKeysTheme {
         console.log('User logged out:', event.detail);
         // Handle user logout
         window.location.reload();
+    }
+    
+    // New methods for digital keys theme
+    
+    initializeDigitalKeysCopy() {
+        // Find and initialize copy buttons for digital keys
+        document.querySelectorAll('.digital-key-copy').forEach(btn => {
+            btn.addEventListener('click', this.copyDigitalKey.bind(this));
+        });
+    }
+    
+    copyDigitalKey(e) {
+        const keyElement = e.currentTarget.closest('.digital-key-container').querySelector('.digital-key-value');
+        if (keyElement) {
+            const keyText = keyElement.innerText;
+            navigator.clipboard.writeText(keyText).then(() => {
+                this.showNotification('تم نسخ المفتاح بنجاح!', 'success');
+                e.currentTarget.innerHTML = '<salla-icon name="check"></salla-icon> تم النسخ';
+                
+                setTimeout(() => {
+                    e.currentTarget.innerHTML = '<salla-icon name="copy"></salla-icon> نسخ المفتاح';
+                }, 2000);
+            }).catch(err => {
+                this.showNotification('فشل في نسخ المفتاح، حاول مرة أخرى', 'error');
+                console.error('Could not copy key: ', err);
+            });
+        }
+    }
+    
+    setupKeyCopyButtons() {
+        // Enhanced key copy buttons with tooltips
+        const keyElements = document.querySelectorAll('.digital-product-key');
+        keyElements.forEach(keyElement => {
+            const copyButton = document.createElement('button');
+            copyButton.className = 'digital-key-copy';
+            copyButton.innerHTML = '<salla-icon name="copy"></salla-icon> نسخ المفتاح';
+            copyButton.setAttribute('aria-label', 'نسخ المفتاح');
+            copyButton.setAttribute('data-tooltip', 'انقر للنسخ');
+            
+            keyElement.appendChild(copyButton);
+            copyButton.addEventListener('click', this.copyDigitalKey.bind(this));
+        });
+    }
+    
+    setupAutoKeyReveal() {
+        // Auto reveal keys after purchase confirmation
+        document.addEventListener('salla:order.created', event => {
+            const { order } = event.detail;
+            // Check if order contains digital products
+            if (order.has_digital_products) {
+                setTimeout(() => {
+                    // Show digital keys section
+                    const keysSection = document.querySelector('.digital-keys-section');
+                    if (keysSection) {
+                        keysSection.classList.add('revealed');
+                    }
+                    
+                    this.showNotification('تم كشف المفاتيح الرقمية الخاصة بك!', 'success');
+                }, 1000);
+            }
+        });
+    }
+    
+    setupExpirationNotifications() {
+        // Check for subscription expirations
+        if (typeof salla !== 'undefined' && salla.api) {
+            salla.api.get('/user/subscriptions').then(response => {
+                const subscriptions = response.data;
+                const today = new Date();
+                
+                // Check for subscriptions expiring soon
+                subscriptions.forEach(sub => {
+                    const expiryDate = new Date(sub.expires_at);
+                    const daysLeft = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+                    
+                    if (daysLeft <= 7 && daysLeft > 0) {
+                        this.showNotification(
+                            `اشتراكك في ${sub.product.name} سينتهي خلال ${daysLeft} أيام`, 
+                            'warning'
+                        );
+                    }
+                });
+            });
+        }
+    }
+    
+    initializeCategoryFilters() {
+        // Enhanced category filters for digital products
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        if (categoryFilters.length) {
+            categoryFilters.forEach(filter => {
+                filter.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const category = filter.dataset.category;
+                    
+                    // Update active class
+                    categoryFilters.forEach(f => f.classList.remove('active'));
+                    filter.classList.add('active');
+                    
+                    // Filter products
+                    document.querySelectorAll('.product-card').forEach(card => {
+                        const cardCategories = card.dataset.categories ? card.dataset.categories.split(',') : [];
+                        
+                        if (category === 'all' || cardCategories.includes(category)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
     }
 }
 

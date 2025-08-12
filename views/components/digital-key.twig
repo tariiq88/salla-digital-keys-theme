@@ -1,0 +1,50 @@
+{% set key_id = random() %}
+
+<div class="digital-key-container" id="key-{{ key_id }}">
+    <div class="digital-key-header">
+        <div class="digital-key-title">
+            {{ title|default('مفتاح المنتج') }}
+        </div>
+        {% if expiry_date is defined %}
+            {% set days_remaining = (expiry_date|date('U') - "now"|date('U')) / 86400 %}
+            <div class="digital-key-expiry {{ days_remaining <= 7 ? 'expiring-soon' : '' }}">
+                {{ days_remaining > 0 ? 'ينتهي في ' ~ days_remaining|round ~ ' أيام' : 'منتهي الصلاحية' }}
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="digital-key-value">
+        {{ key_value|default('XXXX-XXXX-XXXX-XXXX') }}
+    </div>
+    
+    <button class="digital-key-copy" data-key-id="{{ key_id }}">
+        <salla-icon name="copy"></salla-icon>
+        نسخ المفتاح
+    </button>
+    
+    {% if instructions is defined %}
+        <div class="digital-key-footer">
+            <strong>تعليمات التفعيل:</strong>
+            <p>{{ instructions }}</p>
+        </div>
+    {% endif %}
+</div>
+
+{% if show_expiry_warning is defined and show_expiry_warning and expiry_date is defined %}
+    {% if days_remaining <= 7 and days_remaining > 0 %}
+        <div class="subscription-expiry-badge">
+            <salla-icon name="alert-triangle"></salla-icon>
+            <span>اشتراكك سينتهي قريباً</span>
+        </div>
+    {% elseif days_remaining <= 0 %}
+        <div class="subscription-expiry-badge expired">
+            <salla-icon name="alert-circle"></salla-icon>
+            <span>انتهى الاشتراك</span>
+        </div>
+    {% else %}
+        <div class="subscription-expiry-badge active">
+            <salla-icon name="check-circle"></salla-icon>
+            <span>اشتراك نشط</span>
+        </div>
+    {% endif %}
+{% endif %}

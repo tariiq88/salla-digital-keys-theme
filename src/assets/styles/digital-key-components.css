@@ -1,0 +1,177 @@
+/* Digital Key Component Styles */
+.digital-key-container {
+    background: linear-gradient(135deg, var(--gray-100), var(--white));
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.digital-key-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.digital-key-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.digital-key-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+.digital-key-expiry {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+}
+
+.digital-key-expiry.expiring-soon {
+    color: var(--warning-color);
+    font-weight: 500;
+}
+
+.digital-key-value {
+    font-family: monospace;
+    background: var(--gray-100);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    font-size: 1.125rem;
+    letter-spacing: 1px;
+    color: var(--gray-800);
+    margin-bottom: var(--space-md);
+    user-select: all;
+    text-align: center;
+    overflow-wrap: break-word;
+    position: relative;
+}
+
+.digital-key-copy {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.digital-key-copy:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.digital-key-copy:active {
+    transform: translateY(0);
+}
+
+.digital-key-footer {
+    margin-top: var(--space-md);
+    font-size: 0.875rem;
+    color: var(--gray-500);
+}
+
+.digital-keys-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.digital-keys-section.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Category Filter Styles */
+.category-filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+}
+
+.category-filter {
+    background: var(--gray-100);
+    color: var(--gray-700);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.category-filter:hover {
+    background: var(--gray-200);
+    color: var(--gray-800);
+}
+
+.category-filter.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    border-color: transparent;
+}
+
+/* Enhanced Product Card for Digital Products */
+.product-card.digital {
+    position: relative;
+}
+
+.product-card.digital::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 50px 0;
+    border-color: transparent var(--accent-color) transparent transparent;
+    z-index: 1;
+}
+
+.product-card.digital::after {
+    content: '🔑';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: var(--white);
+    font-size: 16px;
+    z-index: 2;
+}
+
+/* Subscription Expiration Badge */
+.subscription-expiry-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: var(--warning-color);
+    color: var(--white);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.subscription-expiry-badge.expired {
+    background: var(--danger-color);
+}
+
+.subscription-expiry-badge.active {
+    background: var(--success-color);
+}
