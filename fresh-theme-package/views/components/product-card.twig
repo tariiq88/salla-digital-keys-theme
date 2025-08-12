@@ -1,0 +1,274 @@
+<!-- Product Card Component -->
+<div class="product-card" data-product-id="{{ product.id }}">
+    <!-- Product Image -->
+    <div class="product-image">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+        {% else %}
+            <div class="product-placeholder">
+                <salla-icon name="image"></salla-icon>
+            </div>
+        {% endif %}
+        
+        <!-- Product Badge -->
+        {% if product.promotion %}
+            <span class="product-badge sale-badge">{{ trans('common.sale') }}</span>
+        {% elseif product.is_new %}
+            <span class="product-badge new-badge">{{ trans('products.badges.new') }}</span>
+        {% elseif product.is_featured %}
+            <span class="product-badge featured-badge">{{ trans('products.badges.bestseller') }}</span>
+        {% endif %}
+        
+        <!-- Quick Actions -->
+        <div class="product-quick-actions">
+            <salla-button 
+                onclick="salla.wishlist.toggle('{{ product.id }}')"
+                shape="icon"
+                color="light"
+                size="small">
+                <salla-icon name="heart"></salla-icon>
+            </salla-button>
+            
+            <salla-button 
+                onclick="salla.product.getDetails('{{ product.id }}')"
+                shape="icon"
+                color="light"
+                size="small">
+                <salla-icon name="eye"></salla-icon>
+            </salla-button>
+        </div>
+    </div>
+    
+    <!-- Product Info -->
+    <div class="product-info">
+        <h3 class="product-title">
+            <a href="{{ product.url }}">{{ product.name }}</a>
+        </h3>
+        
+        <p class="product-description">{{ product.description | striptags | slice(0, 100) }}...</p>
+        
+        <!-- Product Price -->
+        <div class="product-price">
+            {% if product.promotion %}
+                <span class="current-price">{{ product.price | currency }}</span>
+                <span class="original-price">{{ product.regular_price | currency }}</span>
+                <span class="discount-percent">-{{ product.discount_percent }}%</span>
+            {% else %}
+                <span class="current-price">{{ product.price | currency }}</span>
+            {% endif %}
+        </div>
+        
+        <!-- Product Rating -->
+        {% if product.rating %}
+            <div class="product-rating">
+                <salla-rating-stars 
+                    value="{{ product.rating.average }}" 
+                    reviews="{{ product.rating.count }}">
+                </salla-rating-stars>
+            </div>
+        {% endif %}
+        
+        <!-- Add to Cart Button -->
+        <salla-add-product-button 
+            product-id="{{ product.id }}"
+            product-status="{{ product.status }}"
+            product-type="{{ product.type }}"
+            class="add-to-cart-btn">
+            <salla-icon name="cart-plus" slot="icon"></salla-icon>
+            {{ trans('common.add_to_cart') }}
+        </salla-add-product-button>
+    </div>
+</div>
+
+<style>
+.product-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.product-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.1);
+}
+
+.product-placeholder {
+    width: 80px;
+    height: 80px;
+    background: var(--gray-200);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-500);
+    font-size: 2rem;
+}
+
+.product-badge {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    z-index: 2;
+}
+
+.sale-badge {
+    background: var(--danger-color);
+}
+
+.new-badge {
+    background: var(--success-color);
+}
+
+.featured-badge {
+    background: var(--warning-color);
+}
+
+.product-quick-actions {
+    position: absolute;
+    top: var(--space-md);
+    left: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.product-card:hover .product-quick-actions {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.product-info {
+    padding: var(--space-xl);
+}
+
+.product-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    line-height: 1.4;
+}
+
+.product-title a {
+    color: var(--gray-800);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.product-title a:hover {
+    color: var(--primary-color);
+}
+
+.product-description {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-lg);
+    line-height: 1.5;
+}
+
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.current-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: var(--gray-400);
+    font-size: 1rem;
+}
+
+.discount-percent {
+    background: var(--danger-color);
+    color: white;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.product-rating {
+    margin-bottom: var(--space-lg);
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    --button-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --button-color: white;
+    --button-hover-transform: translateY(-2px);
+    --button-shadow: var(--shadow-lg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-image {
+        height: 180px;
+    }
+    
+    .product-info {
+        padding: var(--space-lg);
+    }
+    
+    .product-title {
+        font-size: 1rem;
+    }
+    
+    .current-price {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-image {
+        height: 160px;
+    }
+    
+    .product-info {
+        padding: var(--space-md);
+    }
+    
+    .product-quick-actions {
+        opacity: 1;
+        transform: none;
+    }
+}
+</style>

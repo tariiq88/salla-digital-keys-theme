@@ -1,0 +1,40 @@
+{
+  "vars": {
+    "lang": {
+      "ar": "العربية",
+      "en": "English"
+    },
+    "theme": {
+      "name": "Digital Keys Store",
+      "version": "1.0.0",
+      "author": "Tariq AL Otaibi"
+    },
+    "store": {
+      "name": "Digital Keys Store",
+      "url": "https://example.com",
+      "description": "متجر متخصص في بيع المفاتيح الرقمية والاشتراكات"
+    },
+    "product_categories": [
+      {
+        "id": "entertainment",
+        "name": "الترفيه",
+        "icon": "play-circle"
+      },
+      {
+        "id": "gaming",
+        "name": "الألعاب",
+        "icon": "gamepad"
+      },
+      {
+        "id": "software",
+        "name": "البرامج",
+        "icon": "window"
+      },
+      {
+        "id": "ai",
+        "name": "الذكاء الاصطناعي",
+        "icon": "robot"
+      }
+    ]
+  }
+}

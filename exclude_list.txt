@@ -1,0 +1,7 @@
+fresh-theme-package\
+.git\
+.gitignore
+exclude_list.txt
+update_repo.bat
+zip_theme_package.bat
+create_fresh_package.bat

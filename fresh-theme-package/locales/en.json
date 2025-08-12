@@ -1,0 +1,51 @@
+{
+  "common": {
+    "add_to_cart": "Add to Cart",
+    "view_cart": "View Cart", 
+    "login": "Login",
+    "register": "Sign Up",
+    "home": "Home",
+    "contact": "Contact",
+    "search": "Search",
+    "currency": "SAR",
+    "sale": "Sale"
+  },
+  "header": {
+    "store_name": "Digital Keys Store",
+    "menu": {
+      "entertainment": "Entertainment",
+      "gaming": "Gaming",
+      "software": "Software", 
+      "ai": "AI Services"
+    }
+  },
+  "hero": {
+    "title": "Best Digital Keys and Subscriptions",
+    "description": "Get Netflix, YouTube Premium, Xbox Game Pass, and more at the best prices",
+    "cta_button": "Shop Now"
+  },
+  "products": {
+    "featured_title": "Featured Products",
+    "entertainment_title": "Entertainment Services",
+    "gaming_title": "Gaming",
+    "software_title": "Software & Tools",
+    "ai_title": "AI Services",
+    "badges": {
+      "bestseller": "Bestseller",
+      "new": "New",
+      "most_requested": "Most Requested"
+    }
+  },
+  "footer": {
+    "description": "Your trusted store for the best digital keys and subscriptions at the best prices and highest quality service.",
+    "quick_links": "Quick Links",
+    "customer_service": "Customer Service", 
+    "legal_info": "Legal Information",
+    "copyright": "© 2024 Digital Keys Store. All rights reserved."
+  },
+  "promo": {
+    "title": "Limited Time Special Offers!",
+    "description": "Get up to 30% off on all subscriptions when you purchase 200 SAR or more",
+    "button": "Shop Now and Save"
+  }
+}

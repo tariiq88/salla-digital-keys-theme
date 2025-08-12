@@ -1,0 +1,141 @@
+{% extends "layouts.master" %}
+
+{% block title %}{{ trans('hero.title') }} - {{ store.name }}{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <h1>{{ theme.settings.get('hero_title') ?: trans('hero.title') }}</h1>
+            <p>{{ theme.settings.get('hero_description') ?: trans('hero.description') }}</p>
+            
+            <a href="{{ page('products') }}" class="hero-cta">
+                <salla-icon name="shopping-bag"></salla-icon>
+                {{ trans('hero.cta_button') }}
+            </a>
+            
+            {% if theme.settings.get('show_hero_products') %}
+                <!-- Hero Products Showcase -->
+                <div class="hero-products">
+                    {% for product in products.featured.limit(6) %}
+                        <div class="hero-product-icon">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <div class="product-placeholder">
+                                    {{ product.name | slice(0, 2) | upper }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">{{ trans('products.featured_title') }}</h2>
+            
+            <!-- Featured Products -->
+            <salla-products-slider 
+                source="featured" 
+                display-all-url="{{ page('products') }}"
+                block-title="{{ trans('products.featured_title') }}">
+            </salla-products-slider>
+            
+            <!-- Categories -->
+            {% for category in categories.tree %}
+                {% if category.products.count > 0 %}
+                    <div class="category-section">
+                        <h3 class="category-title">{{ category.name }}</h3>
+                        <div class="products-grid">
+                            {% for product in category.products.limit(6) %}
+                                {% include 'components.product-card' with {product: product} %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Promotional Banner -->
+    <section class="promo-banner">
+        <h2>{{ trans('promo.title') }}</h2>
+        <p>{{ trans('promo.description') }}</p>
+        <a href="{{ page('products') }}" class="promo-btn">{{ trans('promo.button') }}</a>
+    </section>
+
+    <!-- Store Features Component -->
+    <salla-store-features></salla-store-features>
+    
+    <!-- Testimonials -->
+    <salla-testimonials></salla-testimonials>
+    
+{% endblock %}
+
+{% block additional_css %}
+<style>
+    .hero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--space-lg);
+    }
+    
+    .hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: var(--space-lg);
+        background: linear-gradient(45deg, #fff, #e0e7ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .products-section {
+        padding: var(--space-2xl) 0;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--space-lg);
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--gray-800);
+        margin-bottom: var(--space-xl);
+        text-align: center;
+    }
+    
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-xl);
+        margin-bottom: var(--space-2xl);
+    }
+    
+    .promo-banner {
+        background: linear-gradient(135deg, var(--warning-color), #ff6b6b);
+        color: white;
+        text-align: center;
+        padding: var(--space-2xl);
+        border-radius: var(--radius-xl);
+        margin: var(--space-2xl) var(--space-lg);
+    }
+    
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2rem;
+        }
+        
+        .products-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+    }
+</style>
+{% endblock %}
